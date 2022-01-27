@@ -35,6 +35,12 @@
       ],
       "@routes/*": [
         "./src/routes/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@database/*": [
+        "./src/database/*"
       ]
     }
   },

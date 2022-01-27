@@ -18,6 +18,8 @@ module.exports = {
         '@controllers': './src/controllers',
         '@views': './src/views',
         '@routes': './src/routes',
+        '@types': './src/types',
+        '@database': './src/database',
       }
     }]
   ],
