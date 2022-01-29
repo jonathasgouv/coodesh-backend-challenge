@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import '@config/enviroment'
 
 import '@controllers/ArticleController'
 import articleRouter from './routes/article'
@@ -14,6 +15,6 @@ app.get('/', (req, res) => {
   return res.status(200).send('Back-end Challenge 2021 🏅 - Space Flight News')
 })
 
-app.use('/api/', articleRouter)
+app.use('/article/', articleRouter)
 
 export default app
