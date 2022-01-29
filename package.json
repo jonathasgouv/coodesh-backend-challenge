@@ -7,7 +7,9 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "devServer": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "devQueue": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/queue.ts",
+    "dev": "concurrently --kill-others \"yarn devServer\" \"yarn devQueue\"",
     "test": "jest"
   },
   "devDependencies": {
@@ -16,11 +18,13 @@
     "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
+    "@types/bull": "^3.15.7",
     "@types/express": "^4.17.6",
     "@types/jest": "^26.0.0",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "concurrently": "^7.0.0",
     "eslint": "^7.3.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",

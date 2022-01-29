@@ -13,31 +13,22 @@ const spaceflightnewsInstance = axios.create({
 })
 
 cron.schedule('0 9 * * *', async () => {
+  console.log('Started running cron')
   const response = await spaceflightnewsInstance.get('/articles', { params: { _limit: 100 } })
   const articles: IArticle[] = response.data
 
-  let newArticles = 0
-  const errors = []
-
-  articles.forEach(async (article) => {
+  articles.forEach(async article => {
     article._id = article.id
     delete article.id
 
-    const alreadyExists = await Article.findById(article._id).orFail()
+    const alreadyExists = await Article.findById(article._id)
 
     if (!alreadyExists) {
-      await Article.create(article, (error) => {
-        console.info('There was an error creating the article with id ' + article._id)
-        console.table(error)
-
-        errors.push(article)
+      await Article.create(article, () => {
+        Queue.add({ id: article._id })
       })
-
-      newArticles++
     }
   })
 
-  if (errors.length) await Queue.add('SyncMail', errors)
-
-  console.info(`Cron ran successfully. ${newArticles} articles created.`)
+  console.info('Cron ran successfully.')
 })

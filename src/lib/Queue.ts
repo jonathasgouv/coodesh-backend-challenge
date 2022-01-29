@@ -1,31 +1,26 @@
 import Queue from 'bull'
 import redisConfig from '@config/redis'
 
-import * as jobs from '@jobs/index'
+import SyncMail from '@jobs/SyncMail'
 
-const queues = Object.values(jobs).map(job => {
-  return {
-    bull: new Queue(job.key, redisConfig),
-    name: job.key,
-    handle: job.handle
-  }
-})
+const queue = {
+  bull: new Queue(SyncMail.key, redisConfig),
+  name: SyncMail.key,
+  handle: SyncMail.handle
+}
 
 export default {
-  queues,
-  add (name, data) {
-    const queue = this.queues.find(queue => queue.name === name)
-
+  queue,
+  add (data) {
     return queue.bull.add(data)
   },
   process () {
-    return this.queues.forEach(queue => {
-      queue.bull.process(queue.handle)
+    console.log('Starting to process queue')
+    queue.bull.process(queue.handle)
 
-      queue.bull.on('failed', (job, err) => {
-        console.log('Job failed: ' + job.name, job.data)
-        console.log(err)
-      })
+    queue.bull.on('failed', (job, err) => {
+      console.log('Job failed: ' + job.name, job.data)
+      console.log(err)
     })
   }
 }
