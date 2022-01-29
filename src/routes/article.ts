@@ -12,7 +12,7 @@ router.get('/', ArticleController.get)
 router.get('/:id', ArticleController.getById)
 
 // GET request to create article.
-router.post('/:id', ArticleController.create)
+router.post('/', ArticleController.create)
 
 // GET request to update article.
 router.patch('/:id', ArticleController.edit)

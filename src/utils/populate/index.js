@@ -14,6 +14,9 @@ const dbInstance = axios.create({
 })
 
 const getArticles = async () => {
+  const responseteste = await dbInstance.get('/articles')
+  console.log(responseteste.data)
+
   const response = await spaceflightnewsInstance.get('/articles', { params: { _limit: 999999999 } })
   const articles = response.data
 

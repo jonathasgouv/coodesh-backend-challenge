@@ -15,6 +15,6 @@ app.get('/', (req, res) => {
   return res.status(200).send('Back-end Challenge 2021 🏅 - Space Flight News')
 })
 
-app.use('/article/', articleRouter)
+app.use('/articles/', articleRouter)
 
 export default app
