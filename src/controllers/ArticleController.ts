@@ -40,11 +40,9 @@ export default {
   },
   create: async (req: Request, res: Response) => {
     try {
-      const article = await Article.create(req.body)
-
-      if (!article) {
+      const article = await Article.create(req.body, () => {
         return res.status(400).json({ error: 'Missing parameters. Registration failed' })
-      }
+      })
 
       return res.status(200).json(article)
     } catch (error) {
@@ -60,7 +58,7 @@ export default {
         res.status(400).json({ error: 'Id is required' })
       }
 
-      const response = await Article.findByIdAndUpdate(id, req.body)
+      const response = await Article.findByIdAndUpdate(id, req.body).orFail()
 
       if (!response) {
         return res.status(400).json({ error: 'Invalid fields' })
@@ -83,7 +81,7 @@ export default {
         res.status(400).json({ error: 'Id is required' })
       }
 
-      const response = await Article.findByIdAndDelete(id)
+      const response = await Article.findByIdAndDelete(id).orFail()
 
       if (!response) {
         return res.status(400).json({ error: 'Invalid id' })

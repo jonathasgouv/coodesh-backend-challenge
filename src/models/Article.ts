@@ -25,7 +25,7 @@ const ArticleSchema = new mongoose.Schema<IArticle>({
   },
   summary: {
     type: 'string',
-    required: true
+    required: false
   },
   publishedAt: {
     type: 'string',
