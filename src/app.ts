@@ -5,6 +5,8 @@ import '@config/enviroment'
 import '@controllers/ArticleController'
 import articleRouter from './routes/article'
 
+import '@utils/crons/checkUpdates'
+
 const app = express()
 
 app.use(cors())

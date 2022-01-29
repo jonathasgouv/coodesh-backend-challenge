@@ -1,5 +1,5 @@
 export default interface IArticle {
-    id: number;
+    _id: number;
     featured: boolean;
     title: string;
     url: string;

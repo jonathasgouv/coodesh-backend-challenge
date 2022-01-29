@@ -25,6 +25,9 @@ const populateDb = async () => {
   const promises = []
 
   for (const article of articles) {
+    article._id = article.id
+    delete article.id
+
     promises.push(dbInstance.post('/articles/', article))
   }
 

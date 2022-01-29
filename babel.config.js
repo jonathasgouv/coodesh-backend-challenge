@@ -20,6 +20,7 @@ module.exports = {
         '@routes': './src/routes',
         '@types': './src/types',
         '@database': './src/database',
+        '@utils': './src/utils',
       }
     }]
   ],

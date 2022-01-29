@@ -3,6 +3,10 @@ import IArticle from '@types/article'
 
 // Create a Schema corresponding to the document interface.
 const ArticleSchema = new mongoose.Schema<IArticle>({
+  _id: {
+    type: 'number',
+    required: true
+  },
   featured: {
     type: 'boolean',
     required: true
@@ -55,7 +59,7 @@ const ArticleSchema = new mongoose.Schema<IArticle>({
       }
     }
   ]
-})
+}, { _id: false })
 
 // Create a Model.
 const Article = mongoose.model<IArticle>('Article', ArticleSchema)
