@@ -21,6 +21,8 @@ module.exports = {
         '@types': './src/types',
         '@database': './src/database',
         '@utils': './src/utils',
+        '@jobs': './src/jobs',
+        '@lib': './src/lib'
       }
     }]
   ],

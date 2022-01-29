@@ -1,6 +1,7 @@
 import cron from 'node-cron'
 import Article from '@models/Article'
 import IArticle from '@types/article'
+import Queue from '@lib/Queue'
 
 const axios = require('axios')
 
@@ -16,6 +17,7 @@ cron.schedule('0 9 * * *', async () => {
   const articles: IArticle[] = response.data
 
   let newArticles = 0
+  const errors = []
 
   articles.forEach(async (article) => {
     article._id = article.id
@@ -27,11 +29,15 @@ cron.schedule('0 9 * * *', async () => {
       await Article.create(article, (error) => {
         console.info('There was an error creating the article with id ' + article._id)
         console.table(error)
+
+        errors.push(article)
       })
 
       newArticles++
     }
   })
+
+  if (errors.length) await Queue.add('SyncMail', errors)
 
   console.info(`Cron ran successfully. ${newArticles} articles created.`)
 })

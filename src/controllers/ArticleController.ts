@@ -40,11 +40,13 @@ export default {
   },
   create: async (req: Request, res: Response) => {
     try {
-      const article = await Article.create(req.body)
+      const isInvalid = await new Article(req.body).validateSync()
 
-      if (!article) {
+      if (isInvalid) {
         return res.status(400).json({ error: 'Missing parameters. Registration failed' })
       }
+
+      const article = await Article.create(req.body)
 
       return res.status(200).json(article)
     } catch (error) {
