@@ -9,7 +9,7 @@ const spaceflightnewsInstance = axios.create({
 })
 
 const dbInstance = axios.create({
-  baseURL: 'https://localhost:3333',
+  baseURL: 'http://localhost:3333',
   timeout: 54000
 })
 
