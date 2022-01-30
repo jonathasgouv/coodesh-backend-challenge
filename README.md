@@ -49,8 +49,8 @@ Confira os endpoints disponíveis na documentação integrada em "/docs".
 * [Javascript](https://www.javascript.com/)
 * [Node.js](https://nodejs.org/en/)
 * [MongoDB](https://www.mongodb.com/)
-* [Redis](https://www.mongodb.com/)
-* [Docker](https://www.mongodb.com/)
+* [Redis](https://redis.io/)
+* [Docker](https://www.docker.com/)
 * [Typescript](https://www.typescriptlang.org/)
 * [Jest](https://jestjs.io/)
 
