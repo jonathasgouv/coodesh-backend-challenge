@@ -1,6 +1,7 @@
-export default interface IArticle {
-    _id: number;
-    featured: boolean;
+export interface IArticle {
+  id?: number;
+  _id: number;
+  featured: boolean;
     title: string;
     url: string;
     imageUrl: string;
@@ -19,4 +20,4 @@ export default interface IArticle {
         provider: string;
       }
     ]
-  }
+}

@@ -1,6 +1,7 @@
 import cron from 'node-cron'
 import Article from '@models/Article'
-import IArticle from '../../types/article'
+// eslint-disable-next-line no-unused-vars
+import { IArticle } from '../../types/article'
 import Queue from '@lib/Queue'
 
 const axios = require('axios')
@@ -17,9 +18,11 @@ cron.schedule('0 9 * * *', async () => {
   const response = await spaceflightnewsInstance.get('/articles', { params: { _limit: 100 } })
   const articles = response.data
 
-  articles.forEach(async article => {
+  articles.forEach(async (article: IArticle) => {
     article._id = article.id
     delete article.id
+
+    article as IArticle
 
     const alreadyExists = await Article.findById(article._id)
 

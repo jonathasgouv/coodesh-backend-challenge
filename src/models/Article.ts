@@ -1,5 +1,6 @@
 import mongoose from '@database/index'
-import IArticle from '../types/article'
+// eslint-disable-next-line no-unused-vars
+import { IArticle } from '../types/article'
 
 // Create a Schema corresponding to the document interface.
 const ArticleSchema = new mongoose.Schema<IArticle>({
