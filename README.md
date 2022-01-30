@@ -50,7 +50,7 @@ Para popular a database siga o esquema de quotes disponível na documentação i
 Confira os endpoints disponíveis na documentação integrada em "/docs".
 
 ## Apresentação
-Uma explicação do projeto em vídeo pode ser vista em [aqui](https://www.loom.com/embed/896fd2f19e1f4d40b94b7bd606ec3e8e)
+Uma explicação do projeto em vídeo pode ser vista [aqui](https://www.loom.com/embed/896fd2f19e1f4d40b94b7bd606ec3e8e)
 
 ## Construído com
 * [Javascript](https://www.javascript.com/)
