@@ -3,7 +3,7 @@ import Article from '@models/Article'
 import { IArticle } from '../../types/article'
 import Queue from '@lib/Queue'
 
-const axios = require('axios')
+import axios from 'axios'
 
 // https://api.spaceflightnewsapi.net/v3/articles?_limit=999999999
 

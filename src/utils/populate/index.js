@@ -1,14 +1,14 @@
 
-const axios = require('axios')
+import { create } from 'axios'
 
 // https://api.spaceflightnewsapi.net/v3/articles?_limit=999999999
 
-const spaceflightnewsInstance = axios.create({
+const spaceflightnewsInstance = create({
   baseURL: 'https://api.spaceflightnewsapi.net/v3',
   timeout: 54000
 })
 
-const dbInstance = axios.create({
+const dbInstance = create({
   baseURL: 'http://localhost:3333',
   timeout: 54000
 })
