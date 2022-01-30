@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Citei",
-        "description": "Citei é api grátis e open source de frases. A api conta atualmente com quase 600 mil frases.",
+        "title": "Coodesh Challenge",
+        "description": "Api criada para a realização do desafio de backend da Coodesh",
         "contact": {
             "email": "jonathas_gouv@hotmail.com",
             "website": "https://jonathasgouv.github.io"
@@ -11,24 +11,16 @@
     },
     "servers": [
         {
-            "url": "https://citei.herokuapp.com/api/",
+            "url": "https://coodeshchallenge.herokuapp.com/",
             "description": "API de produção"
         }
     ],
     "host": "localhost:3333",
-    "basePath": "/api",
+    "basePath": "/",
     "tags": [
         {
-            "name": "authors",
-            "description": "Rotas relacionadas aos autores"
-        },
-        {
-            "name": "categories",
-            "description": "Rotas relacionadas as categorias"
-        },
-        {
-            "name": "quotes",
-            "description": "Rotas relacionadas as citações em geral"
+            "name": "articles",
+            "description": "Rotas relacionadas aos artigos em geral"
         }
     ],
     "schemes": [
@@ -36,13 +28,13 @@
         "http"
     ],
     "paths": {
-        "/categories": {
+        "/articles": {
             "get": {
                 "tags": [
-                    "categories"
+                    "articles"
                 ],
-                "summary": "Lista todas as categorias",
-                "operationId": "categories",
+                "summary": "Lista todos os artigos",
+                "operationId": "articles",
                 "produces": [
                     "application/json",
                     "application/xml"
@@ -63,7 +55,7 @@
                     {
                         "name": "count",
                         "in": "query",
-                        "description": "Número de categorias a serem retornadas. Máximo de 100",
+                        "description": "Número de citações a serem retornadas. Máximo de 100",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -79,7 +71,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/components/schemas/Categories"
+                                "$ref": "#/components/schemas/Articles"
                             }
                         }
                     },
@@ -87,54 +79,26 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/categories/{category}": {
-            "get": {
+            },
+            "post": {
                 "tags": [
-                    "categories"
+                    "articles"
                 ],
-                "summary": "Lista citações de uma categoria específica",
-                "operationId": "categories",
+                "summary": "Cria um novo artigo",
+                "operationId": "articles",
                 "produces": [
                     "application/json",
                     "application/xml"
                 ],
                 "parameters": [
                     {
-                        "name": "category",
-                        "in": "path",
-                        "description": "Primeira posição a ser retornada",
+                        "name": "article",
+                        "in": "body",
+                        "description": "Artigo a ser criado",
                         "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "description": "Primeira posição a ser retornada",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 0
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "count",
-                        "in": "query",
-                        "description": "Número de citações a serem retornadas. Máximo de 100",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 20
-                        },
-                        "collectionFormat": "multi"
+                        "schema": {
+                            "$ref": "#/components/schemas/Articles"
+                        }
                     }
                 ],
                 "responses": {
@@ -143,12 +107,12 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/components/schemas/Quotes"
+                                "$ref": "#/components/schemas/Articles"
                             }
                         }
-                    },
+                    },                
                     "400": {
-                        "description": "Invalid category"
+                        "description": "Missing parameters. Registration failed"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -156,186 +120,13 @@
                 }
             }
         },
-        "/authors": {
+        "/articles/{id}": {
             "get": {
                 "tags": [
-                    "authors"
+                    "articles"
                 ],
-                "summary": "Lista todos os autores",
-                "operationId": "authors",
-                "produces": [
-                    "application/json",
-                    "application/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "description": "Primeira posição a ser retornada",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 0
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "count",
-                        "in": "query",
-                        "description": "Número de autores a serem retornados. Máximo de 100",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 20
-                        },
-                        "collectionFormat": "multi"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/Categories"
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/authors/{author}": {
-            "get": {
-                "tags": [
-                    "authors"
-                ],
-                "summary": "Lista citações de um autor específico",
-                "operationId": "categories",
-                "produces": [
-                    "application/json",
-                    "application/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "author",
-                        "in": "path",
-                        "description": "Primeira posição a ser retornada",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "description": "Primeira posição a ser retornada",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 0
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "count",
-                        "in": "query",
-                        "description": "Número de citações a serem retornadas. Máximo de 100",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 20
-                        },
-                        "collectionFormat": "multi"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/Quotes"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid author"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/quotes": {
-            "get": {
-                "tags": [
-                    "quotes"
-                ],
-                "summary": "Lista todos as citações",
-                "operationId": "quotes",
-                "produces": [
-                    "application/json",
-                    "application/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "description": "Primeira posição a ser retornada",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 0
-                        },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "count",
-                        "in": "query",
-                        "description": "Número de citações a serem retornadas. Máximo de 100",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 20
-                        },
-                        "collectionFormat": "multi"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/Quotes"
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/quotes/{id}": {
-            "get": {
-                "tags": [
-                    "quotes"
-                ],
-                "summary": "Retorna citação específica pelo id",
-                "operationId": "quotes",
+                "summary": "Retorna artigo específico pelo id",
+                "operationId": "articles",
                 "produces": [
                     "application/json",
                     "application/xml"
@@ -344,7 +135,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id da citação",
+                        "description": "Id do artigo",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -359,7 +150,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/components/schemas/Quotes"
+                                "$ref": "#/components/schemas/Articles"
                             }
                         }
                     },
@@ -370,31 +161,26 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/quotes/random": {
-            "get": {
+            },
+            "patch": {
                 "tags": [
-                    "quotes"
+                    "articles"
                 ],
-                "summary": "Lista citações aleatórias",
-                "operationId": "quotes",
+                "summary": "Atualiza um artigo específico",
+                "operationId": "articles",
                 "produces": [
                     "application/json",
                     "application/xml"
                 ],
                 "parameters": [
                     {
-                        "name": "count",
-                        "in": "query",
-                        "description": "Número de citações a serem retornadas. Máximo de 100",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "default": 20
-                        },
-                        "collectionFormat": "multi"
+                        "name": "article",
+                        "in": "body",
+                        "description": "Artigo a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Articles"
+                        }
                     }
                 ],
                 "responses": {
@@ -403,9 +189,34 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/components/schemas/Quotes"
+                                "$ref": "#/components/schemas/Articles"
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Invalid id"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Deleta um artigo específico",
+                "operationId": "articles",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid id"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -416,48 +227,30 @@
     },
     "components": {
         "schemas": {
-            "Categories": {
+            "Articles": {
                 "type": "object",
                 "properties": {
-                    "category": {
-                        "type": "string"
+                    "_id": {"type": "number"},
+                    "featured": {"type":"boolean"},
+                    "title": {"type":"string"},
+                    "url": {"type":"string"},
+                    "imageUrl": {"type":"string"},
+                    "newsSite": {"type":"string"},
+                    "summary": {"type":"string"},
+                    "publishedAt": {"type":"string"},
+                    "launches": {
+                        "type":"object",
+                        "properties": {
+                            "id": {"type":"string"},
+                            "provider": {"type":"string"}
+                        }
                     },
-                    "categoryslug": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Authors": {
-                "type": "object",
-                "properties": {
-                    "author": {
-                        "type": "string"
-                    },
-                    "authorslug": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Quotes": {
-                "type": "object",
-                "properties": {
-                    "_id": {
-                        "type": "string"
-                    },
-                    "categoryslug": {
-                        "type": "string"
-                    },
-                    "author": {
-                        "type": "string"
-                    },
-                    "category": {
-                        "type": "string"
-                    },
-                    "text": {
-                        "type": "string"
-                    },
-                    "authorslug": {
-                        "type": "string"
+                    "events": {
+                        "type":"object",
+                        "properties": {
+                            "id": {"type":"string"},
+                            "provider": {"type":"string"}
+                        }
                     }
                 }
             }
