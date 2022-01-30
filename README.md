@@ -9,8 +9,10 @@ Projeto criado para cumprir o desafio de backend da Coodesh. Busquei usar as pra
 * [Instalação](#instalação)
 * [Instalação com docker](#instalação-com-docker)
 * [Modo de usar](#modo-de-usar)
+* [Apresentação](#apresentação)
 * [Construído Com](#construído-com)
 * [Autor](#autor)
+* [Licença](#licença)
 
 ##  Começando
 Essas instruções fornecerão uma cópia do projeto instalado e funcionando em sua máquina local para fins de desenvolvimento e teste.
