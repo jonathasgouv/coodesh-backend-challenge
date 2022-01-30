@@ -13,15 +13,13 @@ const spaceflightnewsInstance = axios.create({
 })
 
 cron.schedule('0 9 * * *', async () => {
-  console.log('Started running cron')
+  console.info('Started running cron')
   const response = await spaceflightnewsInstance.get('/articles', { params: { _limit: 100 } })
   const articles = response.data
 
   articles.forEach(async (article: IArticle) => {
     article._id = article.id
     delete article.id
-
-    article as IArticle
 
     const alreadyExists = await Article.findById(article._id)
 
