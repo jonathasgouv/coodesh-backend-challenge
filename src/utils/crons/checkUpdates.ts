@@ -1,6 +1,5 @@
 import cron from 'node-cron'
 import Article from '@models/Article'
-// eslint-disable-next-line no-unused-vars
 import { IArticle } from '../../types/article'
 import Queue from '@lib/Queue'
 

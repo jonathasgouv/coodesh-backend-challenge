@@ -5,7 +5,9 @@
         "jest": true
     },
     "extends": [
-        "standard"
+        "standard",
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

@@ -1,5 +1,4 @@
 import mongoose from '@database/index'
-// eslint-disable-next-line no-unused-vars
 import { IArticle } from '../types/article'
 
 // Create a Schema corresponding to the document interface.
