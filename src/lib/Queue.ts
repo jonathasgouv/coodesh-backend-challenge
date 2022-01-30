@@ -1,10 +1,10 @@
-import Queue from 'bull'
+import Queue, { QueueOptions } from 'bull'
 import redisConfig from '@config/redis'
 
 import SyncMail from '@jobs/SyncMail'
 
 const queue = {
-  bull: new Queue(SyncMail.key, redisConfig),
+  bull: new Queue(SyncMail.key, redisConfig as QueueOptions),
   name: SyncMail.key,
   handle: SyncMail.handle
 }

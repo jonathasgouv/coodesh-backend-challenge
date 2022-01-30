@@ -1,4 +1,3 @@
-import IArticle from '@types/article'
 import Mail from '@lib/Mail'
 
 export default {

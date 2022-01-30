@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/server.js",
+    "start": "concurrently --kill-others \"node dist/server.js\" \"node dist/queue.js\"",
     "devServer": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "devQueue": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/queue.ts",
     "dev": "concurrently --kill-others \"yarn devServer\" \"yarn devQueue\"",
@@ -48,6 +48,7 @@
     "express": "^4.17.1",
     "mongoose": "^6.1.8",
     "node-cron": "^3.0.0",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "supertest": "^6.2.2"
   }
 }

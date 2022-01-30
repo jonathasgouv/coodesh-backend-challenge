@@ -81,22 +81,14 @@ export default {
     try {
       const id = req.params.id as string
 
-      if (!id) {
-        res.status(400).json({ error: 'Id is required' })
-      }
-
-      const response = await Article.findByIdAndDelete(id)
+      const response = await Article.findOneAndDelete({ _id: id })
 
       if (!response) {
         return res.status(400).json({ error: 'Invalid id' })
       }
 
-      return res.status(200)
+      return res.status(200).json(response)
     } catch (error) {
-      if (error.ObjectId) {
-        return res.status(400).json({ error: 'Invalid id' })
-      }
-
       return res.status(500).json({ error: 'Internal server error' })
     }
   }

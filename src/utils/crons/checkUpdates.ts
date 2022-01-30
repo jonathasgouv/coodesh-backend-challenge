@@ -1,6 +1,6 @@
 import cron from 'node-cron'
 import Article from '@models/Article'
-import IArticle from '@types/article'
+import IArticle from '../../types/article'
 import Queue from '@lib/Queue'
 
 const axios = require('axios')
@@ -15,7 +15,7 @@ const spaceflightnewsInstance = axios.create({
 cron.schedule('0 9 * * *', async () => {
   console.log('Started running cron')
   const response = await spaceflightnewsInstance.get('/articles', { params: { _limit: 100 } })
-  const articles: IArticle[] = response.data
+  const articles = response.data
 
   articles.forEach(async article => {
     article._id = article.id
